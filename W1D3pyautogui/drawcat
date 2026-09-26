@@ -1,0 +1,10 @@
+# Standard way to generate ultra-realistic images programmatically in Python
+from diffusers import StableDiffusionPipeline
+import torch
+
+pipe = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16)
+pipe = pipe.to("cuda")
+
+prompt = "A high-detail ultra-realistic studio photograph of a cat, 8k resolution, cinematic lighting"
+image = pipe(prompt).images[0]
+image.save("realistic_cat.png")
